@@ -7,7 +7,7 @@ import Warning from './Component/Warning/Warning'
 
 function App() {
   const [num , setNum] = useState(0);
-  const[ warningDis , setWarningDis] = useState(true)
+  const[ warningDis , setWarningDis] = useState(false)
 
   return (
     <div>
