@@ -21,9 +21,8 @@
     font-weight: 1000;
     display: flex;
     justify-content: flex-end;
-    align-items: flex-end;
-    flex-wrap: wrap;
-    text-wrap: wrap;
+    align-items: center;
+    text-wrap: wrap !important;
 }
 
 @media (max-width: 900px) {
