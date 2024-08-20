@@ -41,7 +41,7 @@ const Signs = ({ display, setDisplay }) => {
         }
         setJustEvaluated(true); // Set flag to indicate evaluation was just performed
       } catch (error) {
-        setDisplay("0");
+        setDisplay("Fanya hesabu vizuri");
       }
     } else if (item === svgBackSpace) {
       // Remove the last character from the display
