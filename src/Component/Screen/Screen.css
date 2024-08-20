@@ -21,10 +21,14 @@
     font-weight: 1000;
     display: flex;
     justify-content: flex-end;
+    align-items: flex-end;
 }
 
 @media (max-width: 900px) {
     .display{
         height: 50vh;
+    }
+    .calculations{
+        font-size: 50px;
     }
 }
