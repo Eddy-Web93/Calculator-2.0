@@ -22,18 +22,9 @@
     display: flex;
     justify-content: flex-end;
 }
-/* @media (max-width: 900px) {
-    .display{
-        height: 55vh;
-    }
-} */
+
 @media (max-width: 900px) {
     .display{
         height: 60vh;
     }
 }
-/* @media (max-width: 500px) {
-    .display{
-        height: 55vh;
-    }
-} */
