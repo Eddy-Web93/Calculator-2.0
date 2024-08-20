@@ -25,50 +25,57 @@ const Signs = ({ display, setDisplay }) => {
     "C", svgBackSpace, svgPercent, "/", 7, 8, 9, '*', 4, 5, 6, "-", 1, 2, 3, "+", ",", 0, ".", svgEquals
   ];
 
-const operation = (item) => {
-  if (item === "C") {
-    // Clear the display
-    setDisplay("");
-    setJustEvaluated(false);
-  } else if (item === svgEquals) {
-    // Evaluate the expression, handling percentages as well
-    try {
-      if (display.includes("%")) {
-        const [number, _] = display.split("%");
-        setDisplay(eval(`${number/100}`)); // Convert percentage to decimal
-      } else {
-        setDisplay(eval(display));
+  const operation = (item) => {
+    if (item === "C") {
+      // Clear the display
+      setDisplay("0");
+      setJustEvaluated(false);
+    } else if (item === svgEquals) {
+      // Evaluate the expression, handling percentages as well
+      try {
+        if (display.includes("%")) {
+          const [number, _] = display.split("%");
+          setDisplay(eval(`${number / 100}`)); // Convert percentage to decimal
+        } else {
+          setDisplay(eval(display));
+        }
+        setJustEvaluated(true); // Set flag to indicate evaluation was just performed
+      } catch (error) {
+        setDisplay("0");
       }
-      setJustEvaluated(true); // Set flag to indicate evaluation was just performed
-    } catch (error) {
-      setDisplay("Error");
-    }
-  } else if (item === svgBackSpace) {
-    // Remove the last character from the display
-    setDisplay(display.slice(0, -1));
-    setJustEvaluated(false);
-  } else if (item === svgPercent) {
-    // Append the percentage sign to the display
-    setDisplay(display + "%");
-    setJustEvaluated(false);
-  } else if(item === 1 || item === 2 || item === 3 || item === 4 || item === 5 || item === 6 || item === 7 || item === 8 || item === 9 || item === 0) {
-    if (justEvaluated) {
-      // Replace the display with the new number
-      setDisplay(item);
+    } else if (item === svgBackSpace) {
+      // Remove the last character from the display
+      if (display.length > 1) {
+        setDisplay(display.slice(0, -1));
+      } else {
+        setDisplay("0");
+      }
       setJustEvaluated(false);
-    } else {
-      setDisplay(display + item);
-    }
-  } else {
-    if (justEvaluated) {
-      // Append the new operator to the answer and continue
-      setDisplay(display + item);
+    } else if (item === svgPercent) {
+      // Append the percentage sign to the display
+      if (!display.includes("%")) {
+        setDisplay(display + "%");
+      }
       setJustEvaluated(false);
+    } else if (typeof item === "number") {
+      if (display === "0" || justEvaluated) {
+        // Replace the display with the new number if it's "0" or just evaluated
+        setDisplay(item.toString());
+        setJustEvaluated(false);
+      } else {
+        setDisplay(display + item.toString());
+      }
     } else {
-      setDisplay(display + item);
+      // Handle operators
+      if (justEvaluated) {
+        // If an evaluation just happened, allow appending an operator to the result
+        setDisplay(display + item);
+        setJustEvaluated(false);
+      } else {
+        setDisplay(display + item);
+      }
     }
-  }
-};
+  };
 
   return (
     <div className='signs'>
