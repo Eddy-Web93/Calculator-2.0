@@ -22,3 +22,8 @@
     display: flex;
     justify-content: flex-end;
 }
+@media (max-width: 900px) {
+    .display{
+        height: 43vh;
+    }
+}
